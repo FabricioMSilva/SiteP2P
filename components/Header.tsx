@@ -195,11 +195,11 @@ export default function Header() {
                   <p className="text-sm font-semibold text-yellow-400 mb-3">💰 Planos de Assinatura:</p>
                   <div className="space-y-2">
                     {[
-                      { dias: '15 dias', preco: 'R$ 20' },
-                      { dias: '30 dias', preco: 'R$ 35' },
-                      { dias: '60 dias', preco: 'R$ 60' },
-                      { dias: '180 dias', preco: 'R$ 150' },
-                      { dias: '360 dias', preco: 'R$ 250' },
+                      { dias: '15 dias', preco: 'R$ 20', Economia: 0 },
+                      { dias: '30 dias', preco: 'R$ 35', Economia: 0  },
+                      { dias: '60 dias', preco: 'R$ 60', Economia: 'R$ 10' },
+                      { dias: '180 dias', preco: 'R$ 150', Economia: 'R$ 60' },
+                      { dias: '360 dias', preco: 'R$ 250', Economia: 'R$ 170' },
                     ].map((plano, idx) => (
                       <div key={idx} className="flex justify-between items-center text-sm bg-white/5 backdrop-blur-sm p-2 rounded border border-white/10 hover:border-yellow-400/50 transition-all">
                         <span className="text-gray-300">{plano.dias}</span>
