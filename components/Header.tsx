@@ -33,7 +33,6 @@ export default function Header() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94], // Cubic bezier para bounce suave
       },
     },
   };
@@ -45,7 +44,6 @@ export default function Header() {
       scale: 1,
       transition: {
         duration: 1.2,
-        ease: "easeOut",
         delay: 1,
       },
     },
