@@ -1,149 +1,227 @@
 "use client";
 
-/**
- * Componente Header
- * Cabeçalho da landing page com o slogan principal
- * Cores: Roxo (#6A0DAD), Amarelo (#FFD700) e Branco (#FFFFFF)
- * Animações: Entrada profissional com stagger e efeitos mobile-first
- */
-
 import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Header() {
-  // Variantes de animação para entrada profissional
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+      transition: { duration: 0.6, staggerChildren: 0.1 },
     },
   };
 
   const itemVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-    },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-      },
-    },
-  };
-
-  const waveVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1.2,
-        delay: 1,
-      },
+      transition: { duration: 0.8 },
     },
   };
 
   return (
-    <header className="bg-purple-iptv text-white py-16 md:py-24 relative overflow-hidden">
-      {/* Topo com logo da empresa */}
-      <div className="absolute inset-x-0 top-0 z-20 bg-black/20 backdrop-blur-sm py-3">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 flex items-center justify-between">
-          <a href="#" className="inline-flex items-center gap-3">
-            
-            <span className="hidden sm:inline-block text-sm md:text-base font-semibold">
-              FBR Consultoria Digital
-            </span>
-          </a>
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <a href="#inicio" className="hover:text-yellow-iptv">Início</a>
-            <a href="#servicos" className="hover:text-yellow-iptv">Serviços</a>
-            <a href="#contato" className="hover:text-yellow-iptv">Contato</a>
-          </nav>
-        </div>
+    <header className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+      {/* Fundo com padrão de malha */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px)',
+        }}></div>
       </div>
 
-      {/* Efeito decorativo de onda no fundo */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-purple-iptv"
-        variants={waveVariants}
-        initial="hidden"
-        animate="visible"
-      ></motion.div>
+      {/* Navbar */}
+      <nav className="relative z-40 border-b border-white/10 backdrop-blur-md bg-black/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
+            <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center font-bold text-lg text-black">
+              FBR
+            </div>
+            <span className="hidden sm:block font-bold text-lg">FBR Digital</span>
+          </motion.div>
 
-      {/* Container do conteúdo */}
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {['Início', 'Serviços', 'Contato'].map((item) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-sm font-medium hover:text-yellow-400 transition-colors"
+                whileHover={{ y: -2 }}
+              >
+                {item}
+              </motion.a>
+            ))}
+            <motion.a
+              href="https://wa.me/seu-numero"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+            >
+              WhatsApp
+            </motion.a>
+          </div>
+
+          {/* Mobile menu button */}
+          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden bg-black/40 backdrop-blur-md border-t border-white/10"
+          >
+            <div className="px-4 py-4 space-y-3">
+              {['Início', 'Serviços', 'Contato'].map((item) => (
+                <a key={item} href={`#${item.toLowerCase()}`} className="block text-sm font-medium hover:text-yellow-400">
+                  {item}
+                </a>
+              ))}
+              <a
+                href="https://wa.me/seu-numero"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold text-center"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
       <motion.div
-        className="max-w-6xl mx-auto px-4 md:px-8 relative z-10"
+        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 flex flex-col lg:flex-row items-center justify-between gap-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Título principal com slogan */}
-        <motion.div
-          className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-4"
-          variants={itemVariants}
-        >
-          <img
-            src="/logo-fbr.png"
-            onError={(event) => {
-              const target = event.currentTarget as HTMLImageElement;
-              target.onerror = null;
-              target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='48' viewBox='0 0 160 48'%3E%3Crect width='160' height='48' rx='8' fill='%236a0dad'/%3E%3Ctext x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='14' fill='%23fff'%3EFBR%20Consultoria%20Digital%3C/text%3E%3C/svg%3E";
-            }}
-            alt="FBR Consultoria Digital"
-            className="h-full max-h-64 md:max-h-80 w-auto object-contain"
-          />
+        {/* Esquerda - Texto */}
+        <motion.div className="flex-1 space-y-6" variants={itemVariants}>
+          <motion.div className="inline-block" variants={itemVariants}>
+            <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent text-sm md:text-base font-bold uppercase tracking-wider">
+              ✨ Solução Completa de Entretenimento
+            </span>
+          </motion.div>
+
           <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold"
+            className="text-5xl md:text-7xl font-black leading-tight"
             variants={itemVariants}
           >
-            <motion.span
-              className="text-yellow-iptv"
-              whileHover={{
-                scale: 1.05,
-                textShadow: "0 0 8px rgba(255, 215, 0, 0.5)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.3 }}
-            >
-              Mais diversão,
-            </motion.span>
-            {' '}
-            <motion.span
-              className="text-white"
-              variants={itemVariants}
-            >
-              menos gasto.
-            </motion.span>
+            <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent">
+              Mais Filme,
+            </span>
+            <br />
+            <span className="text-white">Menos Preço</span>
           </motion.h1>
+
+          <motion.p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-lg" variants={itemVariants}>
+            Acesso ilimitado aos melhores canais, filmes, séries e documentários. Qualidade HD, suporte 24/7 e instalação gratuita.
+          </motion.p>
+
+          <motion.div className="flex flex-col sm:flex-row gap-4 pt-4" variants={itemVariants}>
+            <motion.a
+              href="https://wa.me/seu-numero"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg inline-flex items-center justify-center gap-2 transition-all"
+            >
+              💬 Entrar em Contato
+            </motion.a>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="border-2 border-yellow-400 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 hover:text-black transition-all"
+            >
+              Saiba Mais
+            </motion.button>
+          </motion.div>
+
+          {/* Benefícios rápidos */}
+          <motion.div className="flex flex-wrap gap-4 pt-8" variants={itemVariants}>
+            {['✓ Instalação Grátis', '✓ Suporte 24/7', '✓ Sem Contrato', '✓ TV Premium'].map((benefit) => (
+              <div key={benefit} className="text-sm text-gray-300 flex items-center gap-2">
+                <span className="text-green-400">{benefit.split(' ')[0]}</span> {benefit.split(' ').slice(1).join(' ')}
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
-        {/* Subtítulo descritivo */}
-        <motion.p
-          className="text-lg md:text-xl text-gray-100 mt-6 md:mt-8"
+        {/* Direita - Visual */}
+        <motion.div
+          className="flex-1 relative"
           variants={itemVariants}
+          animate={{ y: [0, -20, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
         >
-          Transforme sua TV em um centro de entretenimento digital
-        </motion.p>
+          <div className="relative w-full aspect-square max-w-lg">
+            {/* Glow background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-20 blur-3xl"></div>
+
+            {/* Card with gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl border border-white/20 p-8 flex flex-col justify-between overflow-hidden">
+              <div className="absolute inset-0 opacity-30">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+              </div>
+
+              <div className="relative z-10 space-y-6">
+                <div className="text-4xl font-bold">
+                  <span className="bg-gradient-to-r from-yellow-300 to-orange-500 bg-clip-text text-transparent">
+                    500+
+                  </span>
+                  <p className="text-xl text-gray-300 mt-2">Canais Disponíveis</p>
+                </div>
+
+                <div className="space-y-3 text-gray-300">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                    <span>Streaming em 4K</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full bg-blue-400"></div>
+                    <span>Sem Travamentos</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                    <span>PPV Exclusivos</span>
+                  </div>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="relative z-10 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-all"
+              >
+                Começar Agora
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
 
-      {/* Decoração de onda CSS na parte inferior */}
-      <motion.svg
-        className="absolute bottom-0 left-0 right-0 w-full h-20"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-        style={{ transform: 'translateY(50%)', fill: 'white' }}
-        variants={waveVariants}
-        initial="hidden"
-        animate="visible"
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
       >
-        <path d="M0,50 Q300,100 600,50 T1200,50 L1200,120 L0,120 Z"></path>
-      </motion.svg>
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+          <div className="w-1 h-2 bg-white/60 rounded-full"></div>
+        </div>
+      </motion.div>
     </header>
   );
 }

@@ -1,239 +1,171 @@
 "use client";
 
-/**
- * Footer Component
- * ────────────────────────────────────────────
- * Rodapé com informações de contato, links rápidos e copyright
- * 
- * Features:
- * • Logo FBR no footer
- * • Contato direto (WhatsApp, Email)
- * • Links de navegação rápida
- * • Coração animado como decoração
- * • Copyright e horário de atendimento
- */
-
 import { motion } from 'framer-motion';
+import { Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  // Variants para animações
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.6, staggerChildren: 0.1 },
     },
   };
 
-  const linkVariants = {
-    hover: {
-      scale: 1.05,
-      color: '#FFD700',
-      transition: { duration: 0.2 },
-    },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
-    <motion.footer
-      className="bg-purple-iptv text-white py-12"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-100px' }}
-      variants={containerVariants}
-    >
-      <div className="max-w-6xl mx-auto px-4 md:px-8">
-        {/* Container principal do footer */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"
-          variants={containerVariants}
-        >
-          {/* Seção: Sobre */}
+    <footer className="relative bg-gradient-to-b from-gray-900 to-black text-white">
+      {/* Main footer content */}
+      <motion.div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="grid md:grid-cols-4 gap-8 mb-16">
+          {/* Brand Section */}
           <motion.div variants={itemVariants}>
-            <motion.h4
-              className="text-lg font-bold text-yellow-iptv mb-3"
-              variants={itemVariants}
-            >
-              Sobre
-            </motion.h4>
-            <motion.p
-              className="text-gray-100 text-sm leading-relaxed"
-              variants={itemVariants}
-            >
-              Sua plataforma de streaming favorita. Mais diversão, menos gasto.
-              Conteúdo de qualidade ao seu alcance.
-            </motion.p>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center font-bold text-black">
+                FBR
+              </div>
+              <span className="text-lg font-bold">FBR Digital</span>
+            </div>
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
+              A melhor plataforma de streaming do Brasil. Entretenimento sem limites.
+            </p>
+            <div className="flex gap-3">
+              {['tw', 'fb', 'ig'].map((social) => (
+                <motion.a
+                  key={social}
+                  href="#"
+                  whileHover={{ scale: 1.2, rotate: 10 }}
+                  className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
+                >
+                  {social === 'tw' && '𝕏'}
+                  {social === 'fb' && 'f'}
+                  {social === 'ig' && '📷'}
+                </motion.a>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Seção: Contato */}
+          {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <motion.h4
-              className="text-lg font-bold text-yellow-iptv mb-3"
-              variants={itemVariants}
-            >
+            <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <span className="w-1 h-6 bg-gradient-to-b from-yellow-400 to-orange-500 rounded"></span>
+              Navegação
+            </h4>
+            <ul className="space-y-3">
+              {['Início', 'Serviços', 'Como Funciona', 'Contato'].map((link) => (
+                <motion.li key={link} whileHover={{ x: 5 }}>
+                  <a href={`#${link.toLowerCase()}`} className="text-gray-400 hover:text-white transition-colors">
+                    {link}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Services */}
+          <motion.div variants={itemVariants}>
+            <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <span className="w-1 h-6 bg-gradient-to-b from-blue-400 to-cyan-500 rounded"></span>
+              Serviços
+            </h4>
+            <ul className="space-y-3">
+              {['Streaming IPTV', 'Suporte 24/7', 'Instalação Grátis', 'Premium+'].map((service) => (
+                <motion.li key={service} whileHover={{ x: 5 }}>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    {service}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Contact */}
+          <motion.div variants={itemVariants}>
+            <h4 className="font-bold text-lg mb-4 flex items-center gap-2">
+              <span className="w-1 h-6 bg-gradient-to-b from-green-400 to-emerald-500 rounded"></span>
               Contato
-            </motion.h4>
-            <motion.ul
-              className="text-gray-100 text-sm space-y-2"
-              variants={itemVariants}
-            >
-              <motion.li variants={itemVariants}>
-                📱 WhatsApp:{' '}
-                <motion.a
-                  href="https://wa.me/24998344324"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-yellow-iptv hover:underline"
-                  variants={linkVariants}
-                  whileHover="hover"
-                  whileTap={{ scale: 0.95 }}
-                >
-                  (24) 99834-4324
-                </motion.a>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                📧 Email: FBRConsultoriaDigital@gmail.com
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                🕐 Atendimento: 09:00 - 22:00
-              </motion.li>
-            </motion.ul>
+            </h4>
+            <div className="space-y-4">
+              <motion.a
+                href="https://wa.me/seu-numero"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ x: 5 }}
+                className="flex items-start gap-3 group"
+              >
+                <Phone size={20} className="text-green-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-gray-400">WhatsApp</p>
+                  <p className="text-white hover:text-green-400 transition-colors">(24) 99834-4324</p>
+                </div>
+              </motion.a>
+
+              <motion.a
+                href="mailto:FBRConsultoriaDigital@gmail.com"
+                whileHover={{ x: 5 }}
+                className="flex items-start gap-3 group"
+              >
+                <Mail size={20} className="text-blue-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <p className="text-white text-sm hover:text-blue-400 transition-colors">FBR@digital.com.br</p>
+                </div>
+              </motion.a>
+
+              <div className="flex items-start gap-3">
+                <MapPin size={20} className="text-orange-400 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="text-sm text-gray-400">Atendimento</p>
+                  <p className="text-white">09:00 - 22:00</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
+        </div>
 
-          {/* Seção: Links rápidos */}
-          <motion.div variants={itemVariants}>
-            <motion.h4
-              className="text-lg font-bold text-yellow-iptv mb-3"
-              variants={itemVariants}
-            >
-              Links Rápidos
-            </motion.h4>
-            <motion.ul
-              className="text-gray-100 text-sm space-y-2"
-              variants={itemVariants}
-            >
-              <motion.li variants={itemVariants}>
-                <motion.a
-                  href="#inicio"
-                  className="hover:text-yellow-iptv transition-colors"
-                  variants={linkVariants}
-                  whileHover="hover"
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Início
-                </motion.a>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <motion.a
-                  href="#servicos"
-                  className="hover:text-yellow-iptv transition-colors"
-                  variants={linkVariants}
-                  whileHover="hover"
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Serviços
-                </motion.a>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <motion.a
-                  href="/privacidade"
-                  className="hover:text-yellow-iptv transition-colors"
-                  variants={linkVariants}
-                  whileHover="hover"
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Política de Privacidade
-                </motion.a>
-              </motion.li>
-            </motion.ul>
-          </motion.div>
-        </motion.div>
-
-        {/* Linha separadora */}
-        <motion.div
-          className="border-t border-purple-400 my-6"
-          variants={itemVariants}
-        ></motion.div>
-
-        {/* Seção inferior com copyright */}
-        <motion.div
-          className="flex flex-col md:flex-row justify-between items-center text-center md:text-left text-gray-200 text-sm"
-          variants={containerVariants}
-        >
-          <div className="flex items-center gap-3 mb-2 md:mb-0">
-            <img
-              src="/logo-fbr.png"
-              onError={(event) => {
-                const target = event.currentTarget as HTMLImageElement;
-                target.onerror = null;
-                target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='48' viewBox='0 0 160 48'%3E%3Crect width='160' height='48' rx='8' fill='%236a0dad'/%3E%3Ctext x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='14' fill='%23fff'%3EFBR%20Consultoria%20Digital%3C/text%3E%3C/svg%3E";
-              }}
-              alt="FBR Consultoria Digital"
-              className="h-full max-h-16 w-auto object-contain"
-            />
-            <motion.p variants={itemVariants}>
-              © {currentYear} Todos os direitos reservados.
+        {/* Divider */}
+        <div className="border-t border-white/10 pt-8">
+          {/* Bottom section */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <motion.p variants={itemVariants} className="text-gray-500 text-sm text-center md:text-left">
+              © {currentYear} FBR Consultoria Digital. Todos os direitos reservados.
             </motion.p>
-          </div>
-          <motion.p
-            variants={itemVariants}
-            className="flex items-center gap-1"
-          >
-            Desenvolvido com{' '}
-            <motion.span
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 10, -10, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 3,
-              }}
-            >
-              ❤️
-            </motion.span>{' '}
-            para melhor entretenimento
-          </motion.p>
-          <motion.p variants={itemVariants}>
-            Contato:{' '}
-            <motion.a
-              href="tel:+5524998344324"
-              className="text-yellow-iptv hover:underline"
-              variants={linkVariants}
-              whileHover="hover"
-              whileTap={{ scale: 0.95 }}
-            >
-              +55 24 99834-4324
-            </motion.a>
-          </motion.p>
-        </motion.div>
 
-        {/* Aviso legal */}
-        <motion.p
-          className="text-xs text-gray-300 mt-6 text-center"
-          variants={itemVariants}
-        >
-          Este serviço é fornecido conforme os termos e condições. Consulte nossa
-          política de privacidade para mais informações sobre como seus dados são
-          tratados.
-        </motion.p>
-      </div>
-    </motion.footer>
+            <motion.div variants={itemVariants} className="flex gap-6 text-sm text-gray-500">
+              {['Privacidade', 'Termos', 'Cookies'].map((legal) => (
+                <a key={legal} href="#" className="hover:text-white transition-colors">
+                  {legal}
+                </a>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Floating WhatsApp CTA */}
+      <motion.a
+        href="https://wa.me/seu-numero"
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ scale: 1.1, rotate: 10 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all z-50"
+      >
+        <span className="text-2xl">💬</span>
+      </motion.a>
+    </footer>
   );
 }
