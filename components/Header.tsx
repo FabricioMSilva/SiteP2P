@@ -45,24 +45,16 @@ export default function Header() {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-8">
-            {['Início', 'Serviços', 'Contato'].map((item) => (
-              <motion.a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-sm font-medium hover:text-yellow-400 transition-colors"
-                whileHover={{ y: -2 }}
-              >
-                {item}
-              </motion.a>
-            ))}
+            
             <motion.a
-              href="https://wa.me/seu-numero"
+              href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+              className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
             >
+              <i className="bi bi-whatsapp"></i>
               WhatsApp
             </motion.a>
           </div>
@@ -87,11 +79,12 @@ export default function Header() {
                 </a>
               ))}
               <a
-                href="https://wa.me/seu-numero"
+                href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold text-center"
+                className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold text-center flex items-center justify-center gap-2"
               >
+                <i className="bi bi-whatsapp"></i>
                 WhatsApp
               </a>
             </div>
@@ -119,7 +112,7 @@ export default function Header() {
             variants={itemVariants}
           >
             <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent">
-              Mais Filme,
+              +Canais +Filmes +Series
             </span>
             <br />
             <span className="text-white">Menos Preço</span>
@@ -131,14 +124,15 @@ export default function Header() {
 
           <motion.div className="flex flex-col sm:flex-row gap-4 pt-4" variants={itemVariants}>
             <motion.a
-              href="https://wa.me/seu-numero"
+              href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg inline-flex items-center justify-center gap-2 transition-all"
             >
-              💬 Entrar em Contato
+              <i className="bi bi-whatsapp"></i>
+              Entrar em Contato
             </motion.a>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -166,13 +160,13 @@ export default function Header() {
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
         >
-          <div className="relative w-full aspect-square max-w-lg">
+          <div className="relative w-full aspect-auto max-w-lg">
             {/* Glow background */}
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl opacity-20 blur-3xl"></div>
 
             {/* Card with gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl border border-white/20 p-8 flex flex-col justify-between overflow-hidden">
-              <div className="absolute inset-0 opacity-30">
+            <div className="relative bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-xl rounded-2xl border border-white/20 p-8 flex flex-col justify-between">
+              <div className="absolute inset-0 opacity-30 pointer-events-none">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
                 <div className="absolute bottom-0 left-0 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
               </div>
@@ -180,15 +174,15 @@ export default function Header() {
               <div className="relative z-10 space-y-6">
                 <div className="text-4xl font-bold">
                   <span className="bg-gradient-to-r from-yellow-300 to-orange-500 bg-clip-text text-transparent">
-                    500+
+                    Roda em TVSmart, Celular e PC.
                   </span>
-                  <p className="text-xl text-gray-300 mt-2">Canais Disponíveis</p>
+                  <p className="text-xl text-gray-300 mt-2">Tudo que você precisa em um só lugar</p>
                 </div>
 
                 <div className="space-y-3 text-gray-300">
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    <span>Streaming em 4K</span>
+                    <span>Mais de 2000 mil  canais e 30000 Filmes e Series</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full bg-blue-400"></div>
@@ -196,32 +190,38 @@ export default function Header() {
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <span>PPV Exclusivos</span>
+                    <span>Sistema P2P e IPTV</span>
+                  </div><div className="mt-6 pt-4 border-t border-white/20">
+                  <p className="text-sm font-semibold text-yellow-400 mb-3">💰 Planos de Assinatura:</p>
+                  <div className="space-y-2">
+                    {[
+                      { dias: '15 dias', preco: 'R$ 20' },
+                      { dias: '30 dias', preco: 'R$ 35' },
+                      { dias: '60 dias', preco: 'R$ 60' },
+                      { dias: '180 dias', preco: 'R$ 150' },
+                      { dias: '360 dias', preco: 'R$ 250' },
+                    ].map((plano, idx) => (
+                      <div key={idx} className="flex justify-between items-center text-sm bg-white/5 backdrop-blur-sm p-2 rounded border border-white/10 hover:border-yellow-400/50 transition-all">
+                        <span className="text-gray-300">{plano.dias}</span>
+                        <span className="text-yellow-400 font-bold">{plano.preco}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
+                </div>
+
+                {/* Tabela de preços */}
+                
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                className="relative z-10 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition-all"
-              >
-                Começar Agora
-              </motion.button>
+              
             </div>
           </div>
         </motion.div>
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-white/60 rounded-full"></div>
-        </div>
-      </motion.div>
+      
     </header>
   );
 }

@@ -49,12 +49,12 @@ export default function CTA() {
           {[
             {
               icon: '⚡',
-              title: 'Instalação Imediata',
+              title: 'Teste Gratis por 6Hrs',
               description: 'Comece a assistir em minutos. Rastreamento em tempo real do técnico.',
             },
             {
               icon: '🎬',
-              title: '500+ Canais',
+              title: '2000+ Canais',
               description: 'Todos os principais canais, filmes, séries, documentários e esportes.',
             },
             {
@@ -69,7 +69,7 @@ export default function CTA() {
             },
             {
               icon: '💰',
-              title: 'Melhor Preço',
+              title: 'Melhor Preço R$30',
               description: 'Os menores preços do mercado com a melhor qualidade garantida.',
             },
             {
@@ -121,14 +121,14 @@ export default function CTA() {
               </p>
 
               <motion.a
-                href="https://wa.me/seu-numero"
+                href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center justify-center gap-3 bg-white text-green-600 px-10 py-5 rounded-full font-bold text-lg md:text-xl hover:shadow-2xl transition-all hover:bg-gray-50"
               >
-                <span>💚</span>
+                <i className="bi bi-whatsapp"></i>
                 Entre em Contato no WhatsApp
                 <span>→</span>
               </motion.a>

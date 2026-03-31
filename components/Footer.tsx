@@ -100,7 +100,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-4">
               <motion.a
-                href="https://wa.me/seu-numero"
+                href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
@@ -121,7 +121,7 @@ export default function Footer() {
                 <Mail size={20} className="text-blue-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
-                  <p className="text-white text-sm hover:text-blue-400 transition-colors">FBR@digital.com.br</p>
+                  <p className="text-white text-sm hover:text-blue-400 transition-colors">FBRConsultoriaDigital@gmail.com.br</p>
                 </div>
               </motion.a>
 
@@ -155,17 +155,28 @@ export default function Footer() {
         </div>
       </motion.div>
 
-      {/* Floating WhatsApp CTA */}
-      <motion.a
-        href="https://wa.me/seu-numero"
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ scale: 1.1, rotate: 10 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all z-50"
-      >
-        <span className="text-2xl">💬</span>
-      </motion.a>
+      {/* Floating container (botao + texto) */}
+      <div className="fixed bottom-6 right-6 flex flex-col items-center gap-2 z-50">
+        <motion.a
+          href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ scale: 1.1, rotate: 10 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all"
+        >
+          <i className="bi bi-whatsapp text-xl"></i>
+        </motion.a>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="bg-yellow-400 text-purple-800 px-3 py-1 rounded-full shadow-sm font-bold text-xs"
+        >
+          Venha fazer Teste Grátis
+        </motion.div>
+      </div>
     </footer>
   );
 }
