@@ -16,6 +16,8 @@ node_modules/
 # Misc
 .DS_Store
 *.pem
+*.p12
+*.pfx
 
 # Debug
 npm-debug.log*
@@ -24,6 +26,13 @@ yarn-error.log*
 
 # Local env files
 .env*.local
+
+# Certificates - SECURITY
+/certs/
+*.p12
+*.pfx
+*.key
+*.cert
 
 # Vercel
 .vercel

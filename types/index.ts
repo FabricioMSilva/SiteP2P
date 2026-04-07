@@ -33,6 +33,35 @@ export interface Benefit {
 }
 
 /**
+ * Interface para plano de assinatura
+ */
+export interface Plan {
+  dias: number | string;
+  preco: string;
+  economia?: string;
+}
+
+/**
+ * Interface para dados de PIX/QR Code
+ */
+export interface PixData {
+  qrCode: string;
+  pixKey: string;
+  amount: number;
+  description: string;
+  expiresIn?: number;
+}
+
+/**
+ * Interface para resposta da API de PIX
+ */
+export interface ApiPixResponse {
+  success: boolean;
+  data?: PixData;
+  error?: string;
+}
+
+/**
  * Constantes de cores da aplicação
  */
 export const COLORS = {

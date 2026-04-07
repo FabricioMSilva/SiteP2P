@@ -3,9 +3,20 @@
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import PixModal from './PixModal';
+import PlansModal from './PlansModal';
+import type { Plan } from '@/types';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPlansModalOpen, setIsPlansModalOpen] = useState(false);
+  const [isPixModalOpen, setIsPixModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+
+  const handleSelectPlan = (plan: Plan) => {
+    setSelectedPlan(plan);
+    setIsPixModalOpen(true);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -44,10 +55,18 @@ export default function Header() {
           </motion.div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-4">
+            <motion.button
+              onClick={() => setIsPlansModalOpen(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-2 rounded-lg font-semibold transition-colors"
+            >
+              💜 Fazer Pagamento
+            </motion.button>
             
             <motion.a
-              href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+              href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20FBR%20Digital.%20Qual%20o%20próximo%20passo%3F"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -55,7 +74,7 @@ export default function Header() {
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
             >
               <i className="bi bi-whatsapp"></i>
-              WhatsApp
+              Solicitar Teste
             </motion.a>
           </div>
 
@@ -78,14 +97,23 @@ export default function Header() {
                   {item}
                 </a>
               ))}
+              <button
+                onClick={() => {
+                  setIsPlansModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-6 py-2 rounded-lg font-semibold text-center"
+              >
+                💜 Fazer Pagamento
+              </button>
               <a
-                href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+                href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20FBR%20Digital.%20Qual%20o%20próximo%20passo%3F"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold text-center flex items-center justify-center gap-2"
               >
                 <i className="bi bi-whatsapp"></i>
-                WhatsApp
+                Solicitar Teste
               </a>
             </div>
           </motion.div>
@@ -201,10 +229,16 @@ export default function Header() {
                       { dias: '180 dias', preco: 'R$ 150', Economia: 'R$ 60' },
                       { dias: '360 dias', preco: 'R$ 250', Economia: 'R$ 170' },
                     ].map((plano, idx) => (
-                      <div key={idx} className="flex justify-between items-center text-sm bg-white/5 backdrop-blur-sm p-2 rounded border border-white/10 hover:border-yellow-400/50 transition-all">
-                        <span className="text-gray-300">{plano.dias}</span>
-                        <span className="text-yellow-400 font-bold">{plano.preco}</span>
-                      </div>
+                      <motion.button
+                        key={idx}
+                        onClick={() => handleSelectPlan(plano)}
+                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(250, 204, 21, 0.1)' }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-full flex justify-between items-center text-sm bg-white/5 backdrop-blur-sm p-2 rounded border border-white/10 hover:border-yellow-400/50 transition-all cursor-pointer group"
+                      >
+                        <span className="text-gray-300 group-hover:text-yellow-400 transition-colors">{plano.dias}</span>
+                        <span className="text-yellow-400 font-bold group-hover:scale-110 transition-transform">{plano.preco}</span>
+                      </motion.button>
                     ))}
                   </div>
                 </div>
@@ -222,6 +256,21 @@ export default function Header() {
 
       {/* Scroll indicator */}
       
+      {/* Modal Planos */}
+      <PlansModal
+        isOpen={isPlansModalOpen}
+        onClose={() => setIsPlansModalOpen(false)}
+        onSelectPlan={handleSelectPlan}
+      />
+
+      {/* Modal PIX */}
+      {selectedPlan && (
+        <PixModal
+          isOpen={isPixModalOpen}
+          onClose={() => setIsPixModalOpen(false)}
+          plan={selectedPlan}
+        />
+      )}
     </header>
   );
 }
