@@ -63,7 +63,7 @@ export default function Header() {
             </motion.button>
             
             <motion.a
-              href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20DigitalTVExpert.%20Qual%20o%20próximo%20passo%3F"
+              href="https://wa.me/5524993341547?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20DigitalTVExpert.%20Qual%20o%20próximo%20passo%3F"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
@@ -104,7 +104,7 @@ export default function Header() {
                 💜 Fazer Pagamento
               </button>
               <a
-                href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20DigitalTVExpert.%20Qual%20o%20próximo%20passo%3F"
+                href="https://wa.me/5524993341547?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20DigitalTVExpert.%20Qual%20o%20próximo%20passo%3F"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold text-center flex items-center justify-center gap-2"
@@ -149,7 +149,7 @@ export default function Header() {
 
           <motion.div className="flex flex-col sm:flex-row gap-4 pt-4" variants={itemVariants}>
             <motion.a
-              href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+              href="https://wa.me/5524993341547?text=Ola%20desejo%20fazer%20teste"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}

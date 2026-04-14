@@ -122,7 +122,7 @@ export default function CTA() {
               </p>
 
               <motion.a
-                href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+                href="https://wa.me/5524993341547?text=Ola%20desejo%20fazer%20teste"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

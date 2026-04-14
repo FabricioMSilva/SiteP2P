@@ -79,10 +79,10 @@ export const COLORS = {
  * Constantes de contato
  */
 export const CONTACT = {
-  whatsapp: '24998344324',
-  whatsappUrl: 'https://wa.me/24998344324',
-  email: 'contato@siteiptv.com',
-  phone: '+55 24 99834-4324',
+  whatsapp: '5524993341547',
+  whatsappUrl: 'https://wa.me/5524993341547',
+  email: 'contato@digitaltvexpert.com',
+  phone: '+55 24 99334-1547',
   schedule: '09:00 - 22:00',
 } as const;
 

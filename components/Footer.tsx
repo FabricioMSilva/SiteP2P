@@ -97,7 +97,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-4">
               <motion.a
-                href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+                href="https://wa.me/5524993341547?text=Ola%20desejo%20fazer%20teste"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 5 }}
@@ -106,7 +106,7 @@ export default function Footer() {
                 <Phone size={20} className="text-green-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-gray-400">WhatsApp</p>
-                  <p className="text-white hover:text-green-400 transition-colors">(24) 99834-4324</p>
+                  <p className="text-white hover:text-green-400 transition-colors">(24) 99334-1547</p>
                 </div>
               </motion.a>
 
@@ -155,7 +155,7 @@ export default function Footer() {
       {/* Floating container (botao + texto) */}
       <div className="fixed bottom-6 right-6 flex flex-col items-center gap-2 z-50">
         <motion.a
-          href="https://wa.me/5524998344324?text=Ola%20desejo%20fazer%20teste"
+          href="https://wa.me/5524993341547?text=Ola%20desejo%20fazer%20teste"
           target="_blank"
           rel="noopener noreferrer"
           whileHover={{ scale: 1.1, rotate: 10 }}
