@@ -24,10 +24,16 @@ interface PixRequestBody {
   plan?: string;
 }
 
+interface EfiQrCodeResponse {
+  qrcode?: string;
+  imagemQrcode?: string;
+  linkVisualizacao?: string;
+}
+
 // Configuração base de URLs da API Banco EFI
 const EFI_API_URLS = {
   production: 'https://api.efipay.com.br',
-  homolog: 'https://api.sandbox.efipay.com.br',
+  homolog: 'https://api.efipay.com.br',
 };
 
 /**
@@ -128,21 +134,50 @@ class BancoEFIPixClient {
       };
 
       const response = await this.client.post(`/v2/cob/${txId}`, payload);
+      const charge = response.data;
+      const locId = charge?.loc?.id;
+
+      let qrCodeData: EfiQrCodeResponse | null = null;
+      if (locId) {
+        qrCodeData = await this.getQrCodeByLocation(locId);
+      }
+
+      const copyPasteCode =
+        qrCodeData?.qrcode ||
+        charge?.qrcode ||
+        charge?.qrCode ||
+        charge?.brCode;
 
       console.log(`✅ QR Code gerado com sucesso! TxId: ${txId}`);
 
+      if (!copyPasteCode) {
+        throw new Error('Banco EFI não retornou o código PIX copia e cola');
+      }
+
       return {
         txId,
-        pixKey: response.data.brCode || response.data.qrCode,
-        qrCodeUrl: response.data.qrCode,
-        copyPaste: response.data.brCode || response.data.qrCode,
+        pixKey: payload.chave,
+        brCode: copyPasteCode,
+        copyPaste: copyPasteCode,
+        qrCodeImage: qrCodeData?.imagemQrcode,
+        qrCodeUrl: qrCodeData?.linkVisualizacao,
         expiresAt: new Date(Date.now() + expiresIn * 1000).toISOString(),
-        status: response.data.status,
+        status: charge?.status,
         amount,
       };
     } catch (error: any) {
       console.error('❌ Erro ao gerar QR Code:', error.response?.data || error.message);
       throw new Error(`Falha ao gerar QR Code: ${error.response?.data?.detalhe || error.message}`);
+    }
+  }
+
+  private async getQrCodeByLocation(locId: number | string): Promise<EfiQrCodeResponse> {
+    try {
+      const response = await this.client.get(`/v2/loc/${locId}/qrcode`);
+      return response.data;
+    } catch (error: any) {
+      console.error('❌ Erro ao buscar payload do QR Code:', error.response?.data || error.message);
+      throw new Error(`Falha ao buscar payload do QR Code: ${error.response?.data?.detalhe || error.message}`);
     }
   }
 }
@@ -175,16 +210,18 @@ async function generateQRCodeImage(pixKey: string): Promise<string> {
  */
 function generateMockQRCode(amount: number, txId: string): any {
   const pixKey = process.env.NEXT_PUBLIC_PIX_KEY || 'chave-pix-teste@seubanco';
-  const brCode = `00020126580014br.gov.bcb.brcode0136${pixKey}520400005303986540510.00`;
+  const brCode = `00020126360014br.gov.bcb.pix0114${pixKey}520400005303986540${amount
+    .toFixed(2)
+    .replace('.', '')}5802BR5925SITE IPTV TESTE6009SAO PAULO62070503***6304ABCD`;
 
   return {
     txId,
     pixKey,
     brCode,
-    qrCode: brCode,
     copyPaste: brCode,
     status: 'ATIVA',
     amount,
+    expiresAt: new Date(Date.now() + 3600 * 1000).toISOString(),
   };
 }
 
@@ -259,19 +296,20 @@ export async function POST(request: NextRequest) {
     }
 
     // Gerar QR Code em imagem
-    const qrCodeImage = await generateQRCodeImage(pixData.pixKey || pixData.brCode);
+    const qrCodeImage = pixData.qrCodeImage || await generateQRCodeImage(pixData.copyPaste || pixData.brCode);
 
     return NextResponse.json({
       success: true,
       data: {
         qrCode: qrCodeImage,
-        pixKey: pixData.pixKey || pixData.brCode,
+        pixKey: pixData.pixKey,
+        brCode: pixData.brCode || pixData.copyPaste,
         copyPaste: pixData.copyPaste || pixData.brCode,
         amount,
         description,
         plan,
         expiresIn,
-        expiresAt: new Date(Date.now() + expiresIn * 1000).toISOString(),
+        expiresAt: pixData.expiresAt || new Date(Date.now() + expiresIn * 1000).toISOString(),
         txId: pixData.txId || txId,
         environment,
         mock: !clientId || !clientSecret,

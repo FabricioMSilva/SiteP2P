@@ -26,7 +26,12 @@ export default function PixModal({ isOpen, onClose, plan }: PixModalProps) {
   const [timeRemaining, setTimeRemaining] = useState<string>('');
 
   // Extrair valor numérico do preço (ex: "R$ 20" -> 20)
-  const amount = parseFloat(plan.preco.replace(/[^\d.]/g, ''));
+  const amount = Number(
+    plan.preco
+      .replace(/\./g, '')
+      .replace(',', '.')
+      .replace(/[^\d.]/g, '')
+  );
 
   useEffect(() => {
     if (isOpen) {
@@ -77,11 +82,11 @@ export default function PixModal({ isOpen, onClose, plan }: PixModalProps) {
     }
   };
 
-  const handleCopyPix = () => {
+  const handleCopyPix = async () => {
     if (!pixData) return;
     
     try {
-      copyPixToClipboard(pixData.copyPaste);
+      await copyPixToClipboard(pixData.copyPaste);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -190,15 +195,15 @@ export default function PixModal({ isOpen, onClose, plan }: PixModalProps) {
                       Código PIX (Copia e Cola)
                     </label>
                     <div className="relative">
-                      <input
-                        type="text"
+                      <textarea
                         value={pixData.copyPaste}
                         readOnly
-                        className="w-full bg-gray-100 border-2 border-gray-300 rounded-lg p-3 text-xs font-mono text-gray-700 focus:border-purple-600 focus:outline-none overflow-hidden"
+                        rows={4}
+                        className="w-full resize-none bg-gray-100 border-2 border-gray-300 rounded-lg p-3 pr-28 text-xs font-mono text-gray-700 focus:border-purple-600 focus:outline-none"
                       />
                       <button
                         onClick={handleCopyPix}
-                        className={`absolute right-3 top-1/2 -translate-y-1/2 px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
+                        className={`absolute right-3 top-3 px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
                           copied
                             ? 'bg-green-500 text-white'
                             : 'bg-purple-600 text-white hover:bg-purple-700'

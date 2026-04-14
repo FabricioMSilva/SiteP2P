@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -34,10 +34,7 @@ export default function Footer() {
           {/* Brand Section */}
           <motion.div variants={itemVariants}>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center font-bold text-black">
-                FBR
-              </div>
-              <span className="text-lg font-bold">FBR Digital</span>
+              <span className="text-lg font-bold">DigitalTVExpert</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-4">
               A melhor plataforma de streaming do Brasil. Entretenimento sem limites.
@@ -114,14 +111,14 @@ export default function Footer() {
               </motion.a>
 
               <motion.a
-                href="mailto:FBRConsultoriaDigital@gmail.com"
+                href="mailto:contato@digitaltvexpert.com"
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-3 group"
               >
                 <Mail size={20} className="text-blue-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
-                  <p className="text-white text-sm hover:text-blue-400 transition-colors">FBRConsultoriaDigital@gmail.com.br</p>
+                  <p className="text-white text-sm hover:text-blue-400 transition-colors">contato@digitaltvexpert.com</p>
                 </div>
               </motion.a>
 
@@ -141,7 +138,7 @@ export default function Footer() {
           {/* Bottom section */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <motion.p variants={itemVariants} className="text-gray-500 text-sm text-center md:text-left">
-              © {currentYear} FBR Consultoria Digital. Todos os direitos reservados.
+              © {currentYear} DigitalTVExpert. Todos os direitos reservados.
             </motion.p>
 
             <motion.div variants={itemVariants} className="flex gap-6 text-sm text-gray-500">
@@ -165,7 +162,7 @@ export default function Footer() {
           whileTap={{ scale: 0.95 }}
           className="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg transition-all"
         >
-          <i className="bi bi-whatsapp text-xl"></i>
+          <MessageCircle size={22} />
         </motion.a>
 
         <motion.div

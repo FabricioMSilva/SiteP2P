@@ -47,9 +47,13 @@ export interface Plan {
 export interface PixData {
   qrCode: string;
   pixKey: string;
+  brCode?: string;
+  copyPaste?: string;
   amount: number;
   description: string;
   expiresIn?: number;
+  expiresAt?: string;
+  txId?: string;
 }
 
 /**

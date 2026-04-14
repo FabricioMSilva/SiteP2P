@@ -7,6 +7,7 @@
 export interface PixPaymentData {
   qrCode: string;
   pixKey: string;
+  brCode?: string;
   copyPaste: string;
   amount: number;
   description: string;
@@ -59,30 +60,32 @@ export async function generatePixQRCode(payload: PixRequestPayload): Promise<Pix
 /**
  * Copia o código PIX para a área de transferência
  */
-export function copyPixToClipboard(pixKey: string): void {
+export async function copyPixToClipboard(pixKey: string): Promise<void> {
   try {
     // Método 1: Tentar com navigator.clipboard (moderno)
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(pixKey).then(() => {
-        console.log('✅ Código PIX copiado para a área de transferência');
-      }).catch(() => {
-        // Fallback de falha
-        copyViaExecCommand(pixKey);
-      });
+      await navigator.clipboard.writeText(pixKey);
+      console.log('✅ Código PIX copiado para a área de transferência');
     } else {
       // Método 2: Usar execCommand (compatível)
-      copyViaExecCommand(pixKey);
+      const copied = copyViaExecCommand(pixKey);
+      if (!copied) {
+        throw new Error('Falha ao copiar usando método alternativo');
+      }
     }
   } catch (error) {
     console.error('❌ Erro ao copiar código PIX:', error);
-    copyViaExecCommand(pixKey);
+    const copied = copyViaExecCommand(pixKey);
+    if (!copied) {
+      throw new Error('Não foi possível copiar o código PIX');
+    }
   }
 }
 
 /**
  * Copia usando document.execCommand (fallback)
  */
-function copyViaExecCommand(text: string): void {
+function copyViaExecCommand(text: string): boolean {
   try {
     const textarea = document.createElement('textarea');
     textarea.value = text;
@@ -97,8 +100,11 @@ function copyViaExecCommand(text: string): void {
     if (successful) {
       console.log('✅ Código PIX copiado para a área de transferência');
     }
+
+    return successful;
   } catch (error) {
     console.error('❌ Erro ao copiar (fallback):', error);
+    return false;
   }
 }
 

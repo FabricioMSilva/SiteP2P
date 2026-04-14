@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, MessageCircle, X } from 'lucide-react';
 import { useState } from 'react';
 import PixModal from './PixModal';
 import PlansModal from './PlansModal';
@@ -48,10 +48,7 @@ export default function Header() {
       <nav className="relative z-40 border-b border-white/10 backdrop-blur-md bg-black/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center font-bold text-lg text-black">
-              FBR
-            </div>
-            <span className="hidden sm:block font-bold text-lg">FBR Digital</span>
+            <span className="font-bold text-lg">DigitalTVExpert</span>
           </motion.div>
 
           {/* Desktop menu */}
@@ -66,14 +63,14 @@ export default function Header() {
             </motion.button>
             
             <motion.a
-              href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20FBR%20Digital.%20Qual%20o%20próximo%20passo%3F"
+              href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20DigitalTVExpert.%20Qual%20o%20próximo%20passo%3F"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2"
             >
-              <i className="bi bi-whatsapp"></i>
+              <MessageCircle size={18} />
               Solicitar Teste
             </motion.a>
           </div>
@@ -107,12 +104,12 @@ export default function Header() {
                 💜 Fazer Pagamento
               </button>
               <a
-                href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20FBR%20Digital.%20Qual%20o%20próximo%20passo%3F"
+                href="https://wa.me/5524998344324?text=Olá%2C%20gostaria%20de%20solicitar%20um%20teste%20grátis%20de%206%20horas%20do%20IPTV%20DigitalTVExpert.%20Qual%20o%20próximo%20passo%3F"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold text-center flex items-center justify-center gap-2"
               >
-                <i className="bi bi-whatsapp"></i>
+                <MessageCircle size={18} />
                 Solicitar Teste
               </a>
             </div>
@@ -159,7 +156,7 @@ export default function Header() {
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg inline-flex items-center justify-center gap-2 transition-all"
             >
-              <i className="bi bi-whatsapp"></i>
+              <MessageCircle size={18} />
               Entrar em Contato
             </motion.a>
             <motion.button

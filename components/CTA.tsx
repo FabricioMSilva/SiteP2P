@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import { MessageCircle } from 'lucide-react';
 
 export default function CTA() {
   const containerVariants = {
@@ -128,7 +129,7 @@ export default function CTA() {
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center justify-center gap-3 bg-white text-green-600 px-10 py-5 rounded-full font-bold text-lg md:text-xl hover:shadow-2xl transition-all hover:bg-gray-50"
               >
-                <i className="bi bi-whatsapp"></i>
+                <MessageCircle size={22} />
                 Entre em Contato no WhatsApp
                 <span>→</span>
               </motion.a>

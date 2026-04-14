@@ -6,9 +6,9 @@ import './globals.css';
  * Keywords para melhor indexação em buscadores
  */
 export const metadata: Metadata = {
-  title: 'IPTV Player - Mais Diversão, Menos Gasto | Serviço FBR',
+  title: 'IPTV Player - Mais Diversão, Menos Gasto | DigitalTVExpert',
   description:
-    'Streaming de filmes, séries e esportes em HD. Assista sem antena ou cabos. Teste grátis por 6 horas com a FBR Consultoria Digital.',
+    'Streaming de filmes, séries e esportos em HD. Assista sem antena ou cabos. Teste grátis por 6 horas com DigitalTVExpert.',
   keywords: 'IPTV, streaming, filmes, séries, esportes, HD, sem antena, sem cabos, entretenimento digital',
   openGraph: {
     title: 'IPTV Player - Mais Diversão, Menos Gasto',
